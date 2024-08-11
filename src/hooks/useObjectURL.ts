@@ -3,6 +3,15 @@ import {useEffect, useState} from "react";
 type Object = File | Blob | undefined;
 type ObjectURL = string | undefined;
 
+// const getUrl = (startimage:File) => {
+//     var canvas = document.createElement('canvas');
+//     canvas.width = startimage.width;
+//     canvas.height = startimage.height;
+//     var ctx = canvas.getContext('2d');
+//     ctx.drawImage(startimage, 0, 0, startimage.width, startimage.height);
+//     var data = canvas.toDataURL("image/jpeg");
+// }
+
 export function useObjectURL(initialObject?: Object): {
     objectURL: ObjectURL,
     object: Object,
@@ -16,8 +25,6 @@ export function useObjectURL(initialObject?: Object): {
         if (!object) {
             return;
         }
-
-        console.log(object);
 
         const objectURL = URL.createObjectURL(object);
         setObjectURL(objectURL);

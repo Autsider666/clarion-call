@@ -5,7 +5,7 @@ import {useObservable} from "dexie-react-hooks";
 export type Photo = {
     id: number,
     createdAt: string,
-    file: Blob,
+    file: string,
 }
 
 const databaseUrl = import.meta.env.VITE_DEXIE_CLOUD_URL;
@@ -21,12 +21,13 @@ database.version(1).stores({
     photos: '@id, createdAt, file'
 });
 
+database.cloud.configure({
+    databaseUrl,
+});
+
 export const enableSync = () => {
     database.cloud.configure({
         databaseUrl,
-        // requireAuth: true,
-        // tryUseServiceWorker: true, // https://dexie.org/cloud/docs/DexieCloudOptions
-        // disableEagerSync: true,
     });
 };
 

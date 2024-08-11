@@ -2,15 +2,38 @@ import {ChangeEvent, ReactElement} from "react";
 import {asyncFunction} from "../utilities/asyncFunction.ts";
 import {database} from "../utilities/database.ts";
 
-export function PhotoUpload(): ReactElement {
-    const upload = asyncFunction(async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
-        for (const file of event.target.files ?? []) {
-            await database.photos.add({
-                file,
-                createdAt: Date.now().toString(),
-            });
-        }
+
+const addToDatabase = asyncFunction(async (file: string) => {
+    await database.photos.add({
+        file,
+        createdAt: Date.now().toString(),
     });
+});
+
+function uploadFile(file: File): void {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+        const result = fileReader.result;
+        if (!result) {
+            throw new Error(`Failed to read file "${file.name}"`);
+        }
+
+        if (result instanceof ArrayBuffer) {
+            console.error('FileReader returned an ArrayBuffer:', result);
+            return;
+        }
+
+        addToDatabase(result);
+    };
+    fileReader.readAsDataURL(file);
+}
+
+export function PhotoUpload(): ReactElement {
+    const upload = (event: ChangeEvent<HTMLInputElement>): void => {
+        for (const file of event.target.files ?? []) {
+            uploadFile(file);
+        }
+    };
 
     return <div>
         <input type="file" accept="image/x-png,image/jpeg,image/gif"
