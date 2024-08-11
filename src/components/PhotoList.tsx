@@ -7,9 +7,9 @@ export function PhotoList(): ReactElement {
     const photos = useLiveQuery(() => database.photos.toArray()) ?? [];
 
     return <ul>
-        {photos.map(({id, createdAt, file}) => <li key={id}>
-            <Base64Image image={file} alt={`${id} - ${createdAt} - ${createdAt}`}/>
-            <span>{id} - {createdAt}</span>
+        {photos.map(({id, name, file}) => <li key={id}>
+            <Base64Image image={file} alt={name}/>
+            <span>{name}</span>
         </li>)}
     </ul>;
 }

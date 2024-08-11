@@ -3,10 +3,11 @@ import {asyncFunction} from "../utilities/asyncFunction.ts";
 import {database} from "../utilities/database.ts";
 
 
-const addToDatabase = asyncFunction(async (file: string) => {
+const addToDatabase = asyncFunction(async (name: string, file: string) => {
     await database.photos.add({
+        name,
         file,
-        createdAt: Date.now().toString(),
+        createdAt: Date.now(),
     });
 });
 
@@ -23,7 +24,7 @@ function uploadFile(file: File): void {
             return;
         }
 
-        addToDatabase(result);
+        addToDatabase(file.name, result);
     };
     fileReader.readAsDataURL(file);
 }
