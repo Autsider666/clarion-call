@@ -27,5 +27,18 @@ export default tseslint.config({
       'warn',
       { allowConstantExport: true },
     ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "camelcase": "error",
+    "no-multiple-empty-lines": "error",
+    "curly": "error",
+//    "no-unused-vars": "error", //TODO specify types
+    "no-duplicate-imports": "error"
   },
 })

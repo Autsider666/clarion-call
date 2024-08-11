@@ -1,11 +1,16 @@
-import './App.css'
+import './App.css';
+import {PhotoList} from "./components/PhotoList.tsx";
+import {PhotoUpload} from "./components/PhotoUpload.tsx";
 
 function App() {
+
+
     return (
         <>
-            <h1>Test Test 123</h1>
+            <PhotoUpload/>
+            <PhotoList/>
         </>
-    )
+    );
 }
 
-export default App
+export default App;
