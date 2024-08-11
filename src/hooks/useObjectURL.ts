@@ -17,6 +17,8 @@ export function useObjectURL(initialObject?: Object): {
             return;
         }
 
+        console.log(object);
+
         const objectURL = URL.createObjectURL(object);
         setObjectURL(objectURL);
 
