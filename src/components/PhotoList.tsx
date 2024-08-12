@@ -8,10 +8,15 @@ export function PhotoList(): ReactElement {
 
     return <IonGrid>
         <IonRow>
-            {photos.map(({id, file}) => <IonCol key={id}>
+            {photos.map(({id, file}) => <IonCol
+                key={id}
+                sizeXs="12"
+                sizeSm="12"
+                sizeMd="6"
+                sizeLg="4"
+                sizeXl="3"
+            >
                 <IonImg src={file}/>
-                {/*<Base64Image image={file} alt={name}/>*/}
-                {/*<span>{name}</span>*/}
             </IonCol>)}
         </IonRow>
     </IonGrid>;
