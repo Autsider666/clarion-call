@@ -1,7 +1,8 @@
-import {ChangeEvent, ReactElement} from "react";
+import {IonFab, IonFabButton, IonIcon} from "@ionic/react";
+import {camera} from 'ionicons/icons';
+import {ChangeEvent, ReactElement, useRef} from "react";
 import {asyncFunction} from "../utilities/asyncFunction.ts";
 import {database} from "../utilities/database.ts";
-
 
 const addToDatabase = asyncFunction(async (name: string, file: string) => {
     await database.photos.add({
@@ -11,7 +12,7 @@ const addToDatabase = asyncFunction(async (name: string, file: string) => {
     });
 });
 
-function uploadFile(file: File): void {
+function handleFileUpload(file: File): void {
     const fileReader = new FileReader();
     fileReader.onload = () => {
         const result = fileReader.result;
@@ -30,14 +31,24 @@ function uploadFile(file: File): void {
 }
 
 export function PhotoUpload(): ReactElement {
-    const upload = (event: ChangeEvent<HTMLInputElement>): void => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    const uploadFile = (event: ChangeEvent<HTMLInputElement>): void => {
         for (const file of event.target.files ?? []) {
-            uploadFile(file);
+            handleFileUpload(file);
         }
     };
 
-    return <div>
-        <input type="file" accept="image/x-png,image/jpeg,image/gif"
-               onChange={event => upload(event)}/>
-    </div>;
+    return <IonFab slot="fixed" vertical="bottom" horizontal="center">
+        <input
+            ref={inputRef}
+            type="file"
+            accept="image/x-png,image/jpeg,image/gif"
+            style={{display: "none"}}
+            onChange={uploadFile}
+        />
+        <IonFabButton onClick={()=>inputRef.current?.click()}>
+            <IonIcon icon={camera}></IonIcon>
+        </IonFabButton>
+    </IonFab>;
 }

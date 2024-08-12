@@ -1,16 +1,18 @@
 import './App.css';
-import {PhotoList} from "./components/PhotoList.tsx";
-import {PhotoUpload} from "./components/PhotoUpload.tsx";
-import {UserDisplay} from "./components/UserDisplay.tsx";
+import {IonApp, IonRouterOutlet, setupIonicReact} from '@ionic/react';
+import {IonReactRouter} from "@ionic/react-router";
+import {Route} from 'react-router-dom';
+import {HomePage} from "./pages/HomePage.tsx";
 
-function App() {
-    return (
-        <>
-            <div style={{padding: 10}}><UserDisplay/></div>
-            <div style={{padding: 10}}><PhotoUpload/></div>
-            <div style={{padding: 10}}><PhotoList/></div>
-        </>
-    );
+setupIonicReact();
+
+export default function App() {
+    return <IonApp>
+        <IonReactRouter>
+            <IonRouterOutlet>
+                <Route path="/" exact component={HomePage}/>
+                {/*<Route path="/about" exact component={About}/>*/}
+            </IonRouterOutlet>
+        </IonReactRouter>
+    </IonApp>;
 }
-
-export default App;
