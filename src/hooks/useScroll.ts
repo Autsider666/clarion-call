@@ -1,16 +1,6 @@
-function scrollToId(elementId: string, msTimeout?: number): void {
-    const element = document.getElementById(elementId);
-    if (!element) {
-        return;
-    }
-
-    const scroll = () => element.scrollIntoView({behavior: "smooth"});
-
-    if (msTimeout === undefined) {
-        scroll();
-    } else {
-        setTimeout(() => scroll(), 0);
-    }
+function scrollToId(elementId: string): void {
+    // Use useLayoutEffect if element changes shape/location at the same time.
+    document.getElementById(elementId)?.scrollIntoView({behavior: "smooth"});
 }
 
 export function useScroll() {

@@ -1,6 +1,6 @@
 import {IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonGrid, IonImg, IonRow} from "@ionic/react";
 import {useLiveQuery} from "dexie-react-hooks";
-import {ReactElement, useEffect, useRef, useState} from "react";
+import {ReactElement, useLayoutEffect, useRef, useState} from "react";
 import {useScroll} from "../../hooks/useScroll.ts";
 import {database} from "../../utilities/database.ts";
 
@@ -18,12 +18,12 @@ export function PhotoGallery(): ReactElement {
         setSelectedItem(id);
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!selectedItem) {
             return;
         }
 
-        scrollToId(String(selectedItem), 1);
+        scrollToId(String(selectedItem));
     }, [scrollToId, selectedItem]);
 
     return <IonGrid ref={gridRef}>
@@ -37,7 +37,7 @@ export function PhotoGallery(): ReactElement {
                 sizeLg={selectedItem === id ? "6" : "4"}
                 sizeXl={selectedItem === id ? "6" : "4"}
             >
-                <IonCard>
+                <IonCard style={{height: '100%'}}>
                     <IonImg src={file} onClick={() => handleToggle(id)} onTouchStart={() => handleToggle(id)}/>
                     <IonCardHeader>{id}</IonCardHeader>
                     <IonCardSubtitle>{(new Date(createdAt)).toLocaleString()}</IonCardSubtitle>
