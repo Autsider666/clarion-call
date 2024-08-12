@@ -11,7 +11,7 @@ export function HomePage(): ReactElement {
                 <IonTitle>Clarion Call</IonTitle>
             </IonToolbar>
         </IonHeader>
-        <IonContent>
+        <IonContent fullscreen>
             <UserDisplay/>
             <PhotoUpload/>
             <PhotoList/>

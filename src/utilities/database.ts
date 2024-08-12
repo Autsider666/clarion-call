@@ -4,7 +4,7 @@ import {useObservable} from "dexie-react-hooks";
 
 export type Photo = {
     id: number,
-    name: string,
+    name?: string,
     file: string,
     createdAt: number,
 }
@@ -26,15 +26,15 @@ database.cloud.configure({
     databaseUrl,
 });
 
-export const clearPhotos = async () => await database.photos.clear();
-
 export const enableSync = () => {
     database.cloud.configure({
         databaseUrl,
     });
 };
+export const clearPhotos = async () => await database.photos.clear();
 
 enableSync();
+// await clearPhotos();
 
 export const useUser = (): UserLogin | undefined => {
     return useObservable(database.cloud.currentUser);

@@ -1,0 +1,7 @@
+{
+  "name": "clarion-call",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
