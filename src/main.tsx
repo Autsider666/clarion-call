@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 import App from './App.tsx';
-import './index.css';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -21,6 +20,8 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 import '@ionic/react/css/palettes/dark.system.css';
+
+import './styles/index.css';
 
 await defineCustomElements(window);
 

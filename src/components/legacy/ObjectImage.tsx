@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import {useObjectURL} from "../hooks/useObjectURL.ts";
+import {useObjectURL} from "../../hooks/useObjectURL.ts";
 
 type ImageProps = {
     alt: string,
