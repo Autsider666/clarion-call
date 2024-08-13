@@ -1,6 +1,6 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import {defineCustomElements} from '@ionic/pwa-elements/loader';
 
 import App from './App.tsx';
 /* Core CSS required for Ionic components to work properly */
@@ -25,8 +25,24 @@ import './styles/index.css';
 
 await defineCustomElements(window);
 
+// if ('serviceWorker' in navigator) {
+//     const updateSW = registerSW({
+//         onOfflineReady() {
+//             console.log('Offline ready!');
+//         },
+//         onNeedRefresh() {
+//             if (confirm("New content available. Reload?")) {
+//                 void (async () => await updateSW(true))();
+//             }
+//         },
+//         onRegisteredSW(swUrl, r) {
+//             console.log(`Refresh Checker: service worker at: ${swUrl}`, r);
+//         }
+//     });
+// }
+
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+    <StrictMode>
+        <App/>
+    </StrictMode>,
 );

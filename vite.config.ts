@@ -1,5 +1,5 @@
-import react from '@vitejs/plugin-react'
-import {defineConfig} from 'vite'
+import react from '@vitejs/plugin-react';
+import {defineConfig} from 'vite';
 import {VitePWA} from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
@@ -7,15 +7,22 @@ export default defineConfig({
     plugins: [
         react(),
         VitePWA({
-            strategies: 'generateSW',
+            // strategies: 'generateSW',
             registerType: 'autoUpdate',
-            includeAssets: [],
+            workbox: {
+                globPatterns: ["**/*"],
+            },
+            includeAssets: [
+                "**/*",
+            ],
             manifest: {
                 name: 'Clarion Call',
+                // eslint-disable-next-line camelcase
                 short_name: 'ClarionCall',
                 description: 'My Awesome App description',
-                // https://coolors.co/palette/233d4d-fe7f2d
-                theme_color: '#FE7F2D',
+                // eslint-disable-next-line camelcase
+                theme_color: '#FE7F2D', // https://coolors.co/palette/233d4d-fe7f2d
+                // eslint-disable-next-line camelcase
                 background_color: '#233D4D',
                 icons: [
                     {
@@ -31,8 +38,9 @@ export default defineConfig({
                 ]
             },
             devOptions: {
-                enabled: true
+                enabled: true,
+                type: 'module',
             },
         })
     ],
-})
+});

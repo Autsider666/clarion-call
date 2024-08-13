@@ -26,14 +26,8 @@ database.cloud.configure({
     databaseUrl,
 });
 
-export const enableSync = () => {
-    database.cloud.configure({
-        databaseUrl,
-    });
-};
 export const clearPhotos = async () => await database.photos.clear();
 
-enableSync();
 // await clearPhotos();
 
 export const useUser = (): UserLogin | undefined => {

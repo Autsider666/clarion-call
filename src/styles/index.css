@@ -4,3 +4,7 @@ ion-card ion-img::part(image) {
     height: 30vh;
     object-fit: cover;
 }
+
+ion-title {
+    text-align: center;
+}
