@@ -34,10 +34,44 @@ export const useUser = (): UserLogin | undefined => {
     return useObservable(database.cloud.currentUser);
 };
 
-database.photos.hook('creating', (key, object, transaction) => {
+database.photos.hook('creating', (key, object) => {
     if (key === undefined) {
         return;
     }
 
-    console.log('new from cloud:', key, object, transaction);
+    const file = object.file;
+
+    console.log('new from cloud:', key, object, file);
+
+    if (!file) {
+        return;
+    }
+
+    console.log(0);
+    if (Notification.permission === 'denied') {
+        return;
+    }
+
+    console.log(1);
+
+    const options: NotificationOptions & {
+        image?: string,
+        actions?: { action: string, title: string, icon?: string }[]
+    } = {
+        tag: object.id,
+        image: file,
+    };
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then((permission) => {
+            console.log(permission);
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("New reminder", options);
+                console.log(notification);
+            }
+        }).catch(error => console.error(error));
+    } else {
+        const notification = new Notification("New reminder", options);
+        console.log(notification);
+    }
 });
