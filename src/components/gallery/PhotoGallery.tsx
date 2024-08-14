@@ -8,9 +8,9 @@ export function PhotoGallery(): ReactElement {
     const gridRef = useRef<HTMLIonGridElement>(null);
     const {scrollToId} = useScroll();
     const photos = useLiveQuery(() => database.photos.toArray()) ?? [];
-    const [selectedItem, setSelectedItem] = useState<number | undefined>();
+    const [selectedItem, setSelectedItem] = useState<string | undefined>();
 
-    const handleToggle = (id: number | undefined): void => {
+    const handleToggle = (id: string | undefined): void => {
         if (id === selectedItem) {
             id = undefined;
         }
@@ -23,14 +23,14 @@ export function PhotoGallery(): ReactElement {
             return;
         }
 
-        scrollToId(String(selectedItem));
+        scrollToId(selectedItem);
     }, [scrollToId, selectedItem]);
 
     return <IonGrid ref={gridRef}>
         <IonRow>
             {photos.map(({id, file, createdAt}) => <IonCol
                 key={id}
-                id={String(id)}
+                id={id}
                 sizeXs="12"
                 sizeSm={selectedItem === id ? "12" : "6"}
                 sizeMd={selectedItem === id ? "12" : "4"}

@@ -1,7 +1,7 @@
 import {
     IonApp,
+    IonButton,
     IonIcon,
-    IonLabel,
     IonRouterOutlet,
     IonTabBar,
     IonTabButton,
@@ -9,7 +9,7 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import {IonReactRouter} from "@ionic/react-router";
-import {imagesOutline, personOutline} from 'ionicons/icons';
+import {camera, images, person} from 'ionicons/icons';
 import {routes} from "./config/routes.tsx";
 import {Redirect, Route} from "react-router-dom";
 
@@ -25,18 +25,24 @@ export default function App() {
                         if (type === "route") {
                             return <Route key={index} exact={exact !== false} {...config}/>;
                         } else {
+                            // @ts-expect-error It's all valid
                             return <Redirect key={index} exact={exact !== false} {...config}/>;
                         }
                     })}
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
                     <IonTabButton tab="gallery" href="/gallery">
-                        <IonIcon icon={imagesOutline}/>
-                        <IonLabel>Images</IonLabel>
+                        <IonIcon icon={images}/>
+                        {/*<IonLabel>Images</IonLabel>*/}
+                    </IonTabButton>
+                    <IonTabButton onClick={() => console.log('click!')}>
+                        <IonButton size="large" fill="solid" shape="round" color="primary">
+                            <IonIcon color="" size="large" icon={camera}></IonIcon>
+                        </IonButton>
                     </IonTabButton>
                     <IonTabButton tab="account" href="/account">
-                        <IonIcon icon={personOutline}/>
-                        <IonLabel>Account</IonLabel>
+                        <IonIcon icon={person}/>
+                        {/*<IonLabel>Account</IonLabel>*/}
                     </IonTabButton>
                 </IonTabBar>
             </IonTabs>

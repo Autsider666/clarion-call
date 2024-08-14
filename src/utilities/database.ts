@@ -3,7 +3,7 @@ import dexieCloud, {UserLogin} from "dexie-cloud-addon";
 import {useObservable} from "dexie-react-hooks";
 
 export type Photo = {
-    id: number,
+    id: string,
     name?: string,
     file: string,
     createdAt: number,
@@ -33,3 +33,11 @@ export const clearPhotos = async () => await database.photos.clear();
 export const useUser = (): UserLogin | undefined => {
     return useObservable(database.cloud.currentUser);
 };
+
+database.photos.hook('creating', (key, object, transaction) => {
+    if (key === undefined) {
+        return;
+    }
+
+    console.log('new from cloud:', key, object, transaction);
+});

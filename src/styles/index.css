@@ -1,4 +1,5 @@
 @import "ionic-variables.css";
+@import "tab-bar.css";
 
 ion-card ion-img::part(image) {
     height: 30vh;
@@ -7,4 +8,9 @@ ion-card ion-img::part(image) {
 
 ion-title {
     text-align: center;
+}
+
+ion-tab-button ion-button::part(native) {
+    padding-left: 16px;
+    padding-right: 16px;
 }
