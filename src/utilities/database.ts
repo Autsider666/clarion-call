@@ -24,6 +24,7 @@ database.version(1).stores({
 
 database.cloud.configure({
     databaseUrl,
+    // tryUseServiceWorker: true,
 });
 
 export const clearPhotos = async () => await database.photos.clear();

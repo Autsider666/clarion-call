@@ -7,7 +7,9 @@ export default defineConfig({
     plugins: [
         react(),
         VitePWA({
-            // strategies: 'generateSW',
+            strategies: 'injectManifest',
+            srcDir: './src',
+            filename: 'service-worker.ts',
             registerType: 'autoUpdate',
             workbox: {
                 globPatterns: ["**/*"],
@@ -40,6 +42,8 @@ export default defineConfig({
             devOptions: {
                 enabled: true,
                 type: 'module',
+                navigateFallback: 'index.html',
+                // navigateFallbackAllowlist: [/^index.html$/]
             },
         })
     ],
