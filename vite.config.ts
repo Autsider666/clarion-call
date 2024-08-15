@@ -8,7 +8,7 @@ export default defineConfig({
         react(),
         VitePWA({
             strategies: 'injectManifest',
-            srcDir: './src',
+            srcDir: './src/serviceWorker',
             filename: 'service-worker.ts',
             registerType: 'autoUpdate',
             workbox: {

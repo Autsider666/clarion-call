@@ -12,7 +12,6 @@ import {IonReactRouter} from "@ionic/react-router";
 import {camera, images, person} from 'ionicons/icons';
 import {routes} from "./config/routes.tsx";
 import {Redirect, Route} from "react-router-dom";
-import './utilities/notification.ts';
 
 // https://ionicframework.com/docs/developing/config
 setupIonicReact();
